@@ -8,7 +8,10 @@ class Register extends Component {
         this.state={
             email:'',
             userName:'',
-            password:''
+            password:'',
+            pImage: '',
+            biografia: '',
+            errorMessage: '',
         }
     }
     componentDidMount(){
@@ -19,18 +22,22 @@ class Register extends Component {
             console.log(user)
             if( user ){
                 //Redirigir al usuario a la home del sitio.
-                this.props.navigation.navigate('Home')
+                this.props.navigation.navigate('Login')
             }
 
         } )
 
     }
 
-    register (email, pass, userName){
-        auth.createUserWithEmailAndPassword(email, pass)
-            .then( response => {
+    register (email, password, userName, pImage, biografia){
+        if (email === '' || pass === '' || userName=== '') {
+            this.setState({ errorMessage: 'Por favor completa todos los campos.' });
+            return; // Salir de la función si hay campos vacíos
+        }
+            auth.createUserWithEmailAndPassword(email, password)
+            .then( () => {
                 //Cuando firebase responde sin error
-                console.log('Registrado ok', response);
+                console.log('Registrado ok');
 
                  //Cambiar los estados a vacío como están al inicio.
 
@@ -39,6 +46,8 @@ class Register extends Component {
                     owner:auth.currentUser.email,
                     userName: userName,
                     createdAt: Date.now(),
+                    bioggrafia: biografia || '',
+                    pImage: pImage || '',
                 })
                 .then( res => console.log(res))
 
@@ -54,6 +63,7 @@ class Register extends Component {
         return(
             <View style={styles.formContainer}>
                 <Text>Register</Text>
+                {this.state.errorMessage ? <Text style={styles.errorText}>{this.state.errorMessage}</Text> : null}
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({email: text})}
