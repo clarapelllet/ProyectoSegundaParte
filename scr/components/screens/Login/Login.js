@@ -7,15 +7,20 @@ class Login extends Component {
         super()
         this.state={
             email:'',
-            password:''
+            password:'',
+            errorMessage: ''
         }
     }
 
     login (email, pass){
+        if (email === '' || pass === '') {
+            this.setState({ errorMessage: 'Por favor completa todos los campos.' });
+            return; // Salir de la función si hay campos vacíos
+        }    
         auth.signInWithEmailAndPassword(email, pass)
-            .then( response => {
+            .then( ()=> {
                 //Cuando firebase responde sin error
-                console.log('Login ok', response);
+                console.log('Login ok');
 
                 //Cambiar los estados a vacío como están al inicio.
 
@@ -34,6 +39,10 @@ class Login extends Component {
         return(
             <View style={styles.formContainer}>
                 <Text>Login</Text>
+                <Text>Login</Text>
+                {this.state.errorMessage && (
+                    <Text style={styles.errorText}>{this.state.errorMessage}</Text>
+            )}
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({email: text})}
@@ -49,10 +58,10 @@ class Login extends Component {
                     secureTextEntry={true}
                     value={this.state.password}
                 />
-                <TouchableOpacity style={styles.button} onPress={()=>this.login(this.state.email, this.state.password)}>
-                    <Text style={styles.textButton}>Ingresar</Text>    
+                <TouchableOpacity style={styles.button} onPress={()=>this.login(this.state.email, this.state.password)}  disabled={!this.state.email || !this.state.password} >
+                    <Text style={styles.textButton}>Ingresar</Text>      
                 </TouchableOpacity>
-                <TouchableOpacity onPress={ () => this.props.navigation.navigate('Registro')}>
+                <TouchableOpacity onPress={ () => this.props.navigation.navigate('Register')}>
                    <Text>No tengo cuenta. Registrarme.</Text>
                 </TouchableOpacity>
             </View>
