@@ -1,7 +1,7 @@
 import react, { Component } from 'react';
-import { TextInput, TouchableOpacity, View, Text, StyleSheet, FlatList } from 'react-native';
 import { db, auth } from '../../firebase/config';
-import Post from '../../components/Post/Post';
+import {TextInput, TouchableOpacity, View, Text, StyleSheet} from 'react-native';
+import Post from '../../component/post';
 
 class Home extends Component {
     constructor() {
@@ -31,7 +31,11 @@ class Home extends Component {
                     })
                 }
             )
-
+    }
+    logout(){
+        auth.signOut();
+         //Redirigir al usuario a la home del sitio.
+        this.props.navigation.navigate('Login')
     }
  
     render() {
