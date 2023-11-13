@@ -41,14 +41,29 @@ class Home extends Component {
     render() {
         console.log(this.state);
         return (
+            // <View>
+            //     <FlatList
+            //         data={this.state.posts}
+            //         keyExtractor={unPost => unPost.id.toString()}
+            //         renderItem={({ item }) => <Post dataPost={item} navigation={this.props.navigation} />}
+
+            //     />
+
+            // </View>
             <View>
+                <TouchableOpacity onPressOut={()=>this.logout()}>
+                    <Text>Logout</Text>
+                </TouchableOpacity>
+
+                <Text>Lista de posteos creados</Text>
+                
                 <FlatList
                     data={this.state.posts}
-                    keyExtractor={unPost => unPost.id.toString()}
-                    renderItem={({ item }) => <Post dataPost={item} navigation={this.props.navigation} />}
-
+                    keyExtractor={ unPost => unPost.id }
+                    renderItem={ ({item}) => <Post dataPost = {item} />  }
                 />
 
+                
             </View>
         )
     }

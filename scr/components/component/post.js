@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
-import { Text, View, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
-import { db, auth } from '../../firebase/config';
-=======
 import { Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import { db, auth } from '../firebase/config';
->>>>>>> afcacf8b3c4148b2dec91a8627591c9e7e0b1b5e
 import firebase from 'firebase';
 import { AntDesign } from '@expo/vector-icons'
 
@@ -67,7 +62,7 @@ comentario (Comentario, date) {
     let comentario = {
         userName: auth.currentUser.email,
         createdAt: date,
-        texto: comentario
+        texto: Comentario
     }
 
     db.collection ("posts").doc(this.props.dataPost.id).update({
@@ -81,7 +76,6 @@ comentario (Comentario, date) {
             )
         .catch (e => console.log  (e))
 }
-
 
 
 render() {
@@ -117,8 +111,8 @@ render() {
                         <AntDesign
                            name='heart-o' color='black' size={20}
                         />
-                    </TouchableOpacity>,
-
+                    </TouchableOpacity>
+            }
                     <TextInput
                         style = {styles.input}
                         onChangeText = {(text) => this.setState ({ComentarioTexto: text})}
@@ -127,9 +121,9 @@ render() {
                     />,
                     <TouchableOpacity style={styles.button} onPress={() => this.comment(this.state.comentarioTexto, Date.now())} >
                     <Text style={styles.textButton}>Comentar</Text>
-               
-                </TouchableOpacity>
-                {this.props.dataPost.datos.comentarios.length > 0 ?(
+                    </TouchableOpacity>
+                
+                    {this.props.dataPost.datos.comentarios.length > 0 ?(
                        <FlatList
                        data = {this.props.dataPost.datos.comentarios}
                        keyExtractor={(com)=> com.id}
@@ -145,9 +139,7 @@ render() {
                         (<Text style={styles.sincomments}>No hay comentarios</Text>)}
         </View>
     )}
-
-                       }
-
+}                
 const styles = StyleSheet.create({
     formContainer:{
         paddingHorizontal:10,
