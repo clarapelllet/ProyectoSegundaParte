@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
 import { db, auth } from '../../firebase/config';
 import firebase from 'firebase';
 import { AntDesign } from '@expo/vector-icons'
@@ -11,8 +11,10 @@ class Post extends Component {
 
         this.state = {
             like: false,
-            cantidadDeLikes: this.props.dataPost.datos.likes.length
-            // cantidadDeComentarios: this.props.dataPost.datos.comentarios.length
+            cantidadDeLikes: this.props.dataPost.datos.likes.length,
+            cantidadDeComentarios: 0,
+            comentarios: [],
+            ComentarioTexto:[],
         }
     }
 
@@ -56,10 +58,30 @@ class Post extends Component {
         .catch( e => console.log(e))
     }
 
+comentario (Comentario, date) {
+    let comentario = {
+        userName: auth.currentUser.email,
+        createdAt: date,
+        texto: comentario
+    }
+
+    db.collection ("posts").doc(this.props.dataPost.id).update({
+        comentarios:firebase.firestore.FieldValue.arrayUnion(comentario)    
+    })
+        .then (res => this.setState ({
+            user: auth.currentUser.email,
+            comentario: this.props.dataPost.datos.comentario,
+            cantidadDeComentarios: this.props.dataPost.datos.comentarios.length
+        })
+            )
+        .catch (e => console.log  (e))
+}
+
 
 
 render() {
     console.log(this.props)
+    console.log (this.state.ComentarioTexto)
     return (
         <View>
             {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('Navigation',
@@ -90,13 +112,36 @@ render() {
                         <AntDesign
                            name='heart-o' color='black' size={20}
                         />
-                    </TouchableOpacity>
+                    </TouchableOpacity>,
 
-            };
+                    <TextInput
+                        style = {styles.input}
+                        onChangeText = {(text) => this.setState ({ComentarioTexto: text})}
+                        placeholder = "comentar"
+                        value = {this.state.ComentarioTexto}
+                    />,
+                    <TouchableOpacity style={styles.button} onPress={() => this.comment(this.state.comentarioTexto, Date.now())} >
+                    <Text style={styles.textButton}>Comentar</Text>
+               
+                </TouchableOpacity>
+                {this.props.dataPost.datos.comentarios.length > 0 ?(
+                       <FlatList
+                       data = {this.props.dataPost.datos.comentarios}
+                       keyExtractor={(com)=> com.id}
+                       renderItem= {({item}) => (
+                        <Text style={styles.commentBox}>
+                         <Text style={styles.usuariosCom}>{item.userName}: </Text>
+                         <Text >{item.texto}</Text>
+                        </Text>
+                       )} 
+                       />
+                      
+                        ) : 
+                        (<Text style={styles.sincomments}>No hay comentarios</Text>)}
         </View>
     )}
 
-        }
+                       }
 
 const styles = StyleSheet.create({
     formContainer:{
