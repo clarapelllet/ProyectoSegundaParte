@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import { Text, View, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
 import { db, auth } from '../../firebase/config';
+=======
+import { Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import { db, auth } from '../firebase/config';
+>>>>>>> afcacf8b3c4148b2dec91a8627591c9e7e0b1b5e
 import firebase from 'firebase';
 import { AntDesign } from '@expo/vector-icons'
 
