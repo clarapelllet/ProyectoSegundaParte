@@ -6,6 +6,7 @@ import { StyleSheet, Text, View } from 'react-native';
 const Tab = createBottomTabNavigator();
 
 import Home from '../screens/Home/Home';
+import Form from '../screens/Form/Form';
 
 export default function TabNav(){
     return (
