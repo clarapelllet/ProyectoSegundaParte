@@ -16,84 +16,90 @@ class Register extends Component {
     }
     componentDidMount(){
         console.log("Chequear si el usuario está loguado en firebase.");
-        // Puse la funcionalidad aquí para probarla. No necesariamente debe ir en este componente.
-
+        
         auth.onAuthStateChanged( user => {
             console.log(user)
             if( user ){
-                //Redirigir al usuario a la home del sitio.
+                //Redirigir al usuario al login del sitio.
                 this.props.navigation.navigate('Login')
             }
 
         } )
 
     }
-
-    register (email, password, userName, pImage, biografia){
-        if (email === '' || pass === '' || userName=== '') {
-            this.setState({ errorMessage: 'Por favor completa todos los campos.' });
-            return; // Salir de la función si hay campos vacíos
-        }
+    register(email,password,userName,biografia,pImage){
+    
+        if (email && password && userName) {
             auth.createUserWithEmailAndPassword(email, password)
-            .then( () => {
-                //Cuando firebase responde sin error
-                console.log('Registrado ok');
-
-                 //Cambiar los estados a vacío como están al inicio.
-
-                //Crear una colección Users
-                db.collection('users').add({
-                    owner:auth.currentUser.email,
-                    userName: userName,
-                    createdAt: Date.now(),
-                    bioggrafia: biografia || '',
-                    pImage: pImage || '',
+                .then(() => {
+                    db.collection('users').add({
+                        owner: auth.currentUser.email,
+                        userName: userName,
+                        biografia: biografia || '',
+                        pImage: pImage || '',
+                        createdAt: Date.now(),
+                    })
+                    this.props.navigation.navigate("Login")
+                   
                 })
-                .then( res => console.log(res))
+                .catch(error => {
+                    this.setState({ errorMessage: error.message });
+                    console.error('Firebase authentication error:', error);
+                });
+        } else {
+            this.setState({ errorMessage: 'Todos los campos obligatorios deben completarse.' });
+        }
+    };
 
-            })
-            .catch( error => {
-                //Cuando Firebase responde con un error
-                console.log(error);
-
-            })
-    }
-
-    render(){
-        return(
+    render() {
+        return (
             <View style={styles.formContainer}>
-                <Text>Register</Text>
+                <Text>Registro</Text>
                 {this.state.errorMessage ? <Text style={styles.errorText}>{this.state.errorMessage}</Text> : null}
                 <TextInput
                     style={styles.input}
-                    onChangeText={(text)=>this.setState({email: text})}
-                    placeholder='email'
+                    onChangeText={text => this.setState({ email: text })}
+                    placeholder='Email'
                     keyboardType='email-address'
                     value={this.state.email}
-                    />
+                />
                 <TextInput
                     style={styles.input}
-                    onChangeText={(text)=>this.setState({userName: text})}
-                    placeholder='user name'
+                    onChangeText={text => this.setState({ userName: text })}
+                    placeholder='Nombre de usuario'
                     keyboardType='default'
                     value={this.state.userName}
-                    />
+                />
                 <TextInput
                     style={styles.input}
-                    onChangeText={(text)=>this.setState({password: text})}
-                    placeholder='password'
+                    onChangeText={text => this.setState({ password: text })}
+                    placeholder='Contraseña'
                     keyboardType='default'
                     secureTextEntry={true}
                     value={this.state.password}
                 />
-                <TouchableOpacity style={styles.button} onPress={()=>this.register(this.state.email, this.state.password, this.state.userName)}>
-                    <Text style={styles.textButton}>Registrarse</Text>    
+                <TextInput
+                    style={styles.input}
+                    onChangeText={text => this.setState({ bio: text })}
+                    placeholder='Mini Bio (opcional)'
+                    keyboardType='default'
+                    value={this.state.bio}
+                />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={text => this.setState({ profileImage: text })}
+                    placeholder='URL de la foto de perfil (opcional)'
+                    keyboardType='default'
+                    value={this.state.profileImage}
+                />
+                <TouchableOpacity style={styles.button} onPress={()=> this.register(this.state.email,this.state.password,this.state.userName, this.state.bio, this.state.profileImage)}disabled={!this.state.email || !this.state.password || !this.state.userName}>
+                    <Text style={styles.textButton}>Registrarse</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={ () => this.props.navigation.navigate('Login')}>
-                   <Text>Ya tengo cuenta. Ir al login</Text>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Login')}>
+                    <Text>¿Ya tienes una cuenta? Ir al login</Text>
                 </TouchableOpacity>
             </View>
-        )
+        );
     }
 }
 
