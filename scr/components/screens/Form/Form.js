@@ -19,7 +19,7 @@ class Form extends Component {
             createdAt: createdAt, //Date.now(), 
             likes: [], 
             comentarios: [], 
-            photo: this.state.url,
+            // photo: this.state.url,
         })
         .then( res => console.log(res))
         .catch( e => console.log(e))

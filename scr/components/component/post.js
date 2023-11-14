@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, TextInput, FlatList } from 'react-native';
 import { db, auth } from '../firebase/config';
 import firebase from 'firebase';
 import { AntDesign } from '@expo/vector-icons'
@@ -11,10 +11,11 @@ class Post extends Component {
 
         this.state = {
             like: false,
-            cantidadDeLikes: this.props.dataPost.datos.likes.length,
-            cantidadDeComentarios: 0,
+            cantidadDeLikes: 0,
+            CantidadDeComentarios: 0,
             comentarios: [],
             ComentarioTexto:[],
+            
         }
     }
 
@@ -70,7 +71,7 @@ class Post extends Component {
             .then(res => this.setState({
                 user: auth.currentUser.email,
                 comment: this.props.dataPost.datos.comentario,
-                cantidadDeComments: this.props.dataPost.datos.comentarios.length
+                CantidadDeComentarios: this.props.dataPost.datos.comentarios.length
             })
 
             )
@@ -83,50 +84,51 @@ class Post extends Component {
 render() {
     console.log(this.props)
     console.log (this.state.ComentarioTexto)
+    console.log(this.props.dataPost.datos.comentarios)
     return (
-        <View>
-            {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('Navigation',
-                    {
-                        screen: 'Perfil',
-                        params:{email:this.props.data.owner}})}> 
-                        
-            <Text>{this.props.dataPost.datos.owner}</Text>
-
-            </TouchableOpacity> */} 
-            {/* hacer perfil y descomentar */}
-
-            {/* Agrega la foto del usuario */}
-            <Text>{this.props.dataPost.datos.textoPost}</Text>
-            <Text>Cantidad de Likes: {this.state.cantidadDeLikes}</Text>
-            <Text onPress={() => this.redirectToComments()}>Cantidad de Comentarios: {this.state.cantidadDeComentarios}</Text>
+        <View style={styles.postContainer}>
+        <View style={styles.userInfo}>
+            {/* <TouchableOpacity
+             onPress={() => this.props.navigation.navigate(
+                'SuPerfil', this.props.dataPost.datos.owner )}> */}
+                <Text style={styles.username}>Posteo de: {this.props.dataPost.datos.owner}</Text>
+            {/* </TouchableOpacity> */}
+        </View>
+        <Text >{this.props.dataPost.datos.textoPost}</Text>
+        <View >
             {
                 this.state.like ?
                     <TouchableOpacity style={styles.button} onPress={() => this.unlike()}>
                         <AntDesign name='heart' color='red' size={20} />
-                        <Text style={styles.textButton}>unLike</Text>
+                        <Text style={styles.textButton}>unlike</Text>
                     </TouchableOpacity>
 
                     :
 
                     <TouchableOpacity style={styles.button} onPress={() => this.likear()}>
-                        <Text style={styles.textButton}>Likear</Text>
+                        <Text style={styles.textButton}>Like</Text>
                         <AntDesign
                            name='heart-o' color='black' size={20}
                         />
                     </TouchableOpacity>
-            }
-                    <TextInput
+
+            } 
+
+
+            {/* <Text style={styles.likeCount}>{this.state.cantidadDeLikes} Likes</Text> */}
+        </View>
+        <TextInput
                     style={styles.input}
-                    onChangeText={(text) => this.setState({ ComentarioTexto: text  })}
+                    onChangeText={(text) => this.setState({ comentarioTexto: text  })}
                     placeholder='Comentar...'
                     keyboardType='default'
-                    value={this.state.ComentarioTexto}
+                    value={this.state.comentarioTexto}
                 />
 
-                <TouchableOpacity style={styles.button} onPress={() => this.comment(this.state.ComentarioTexto, Date.now())} >
+        <TouchableOpacity style={styles.button} onPress={() => this.comment(this.state.comentarioTexto, Date.now())} >
                     <Text style={styles.textButton}>Comentar</Text>
                 </TouchableOpacity>
-                {this.props.dataPost.datos.comentarios.length > 0 ?(
+                {this.state.CantidadDeComentarios > 0 ?(
                        <FlatList
                        data = {this.props.dataPost.datos.comentarios}
                        keyExtractor={(com)=> com.id}
@@ -141,14 +143,24 @@ render() {
                         ) : 
                         (<Text style={styles.sincomments}>No hay comentarios</Text>)}
 
+     </View> 
+)}}
 
-            </View>
-    )}
-}                
+
 const styles = StyleSheet.create({
-    formContainer:{
-        paddingHorizontal:10,
-        marginTop: 20,
+    postContainer: {
+        margin: 10,
+        padding: 10,
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
     },
     input:{
         height:20,
@@ -179,8 +191,11 @@ const styles = StyleSheet.create({
         },
     likeText: {
             marginLeft: 5
-        }
-    });
-
+        },
+   
+    userInfo: {
+        marginBottom: 10,
+    },
+ });
 
 export default Post;

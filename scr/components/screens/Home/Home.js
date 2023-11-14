@@ -54,9 +54,7 @@ class Home extends Component {
                     renderItem={ ({item}) => <Post dataPost = {item} />  }
                 />
 
-                               
-                <Text>Crear nuevo post</Text>
-                {/* {this.props.navigation.navigate('Tabnavigation')} */}
+                    
                 
             </View>
         )
