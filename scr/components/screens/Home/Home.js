@@ -41,15 +41,6 @@ class Home extends Component {
     render() {
         console.log(this.state);
         return (
-            // <View>
-            //     <FlatList
-            //         data={this.state.posts}
-            //         keyExtractor={unPost => unPost.id.toString()}
-            //         renderItem={({ item }) => <Post dataPost={item} navigation={this.props.navigation} />}
-
-            //     />
-
-            // </View>
             <View>
                 <TouchableOpacity onPressOut={()=>this.logout()}>
                     <Text>Logout</Text>
@@ -63,6 +54,9 @@ class Home extends Component {
                     renderItem={ ({item}) => <Post dataPost = {item} />  }
                 />
 
+                               
+                <Text>Crear nuevo post</Text>
+                {/* {this.props.navigation.navigate('Tabnavigation')} */}
                 
             </View>
         )

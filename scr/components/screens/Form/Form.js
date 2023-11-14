@@ -2,7 +2,7 @@ import react, { Component } from 'react';
 import {db, auth } from '../../firebase/config';
 import {TextInput, TouchableOpacity, View, Text, StyleSheet} from 'react-native';
 
-class PostForm extends Component {
+class Form extends Component {
     constructor(){
         super()
         this.state={
@@ -16,7 +16,10 @@ class PostForm extends Component {
         db.collection('posts').add({
             owner: owner, //auth.currentUser.email,
             textoPost: textoPost, //this.state.textoPost,
-            createdAt: createdAt //Date.now(), 
+            createdAt: createdAt, //Date.now(), 
+            likes: [], 
+            comentarios: [], 
+            photo: this.state.url,
         })
         .then( res => console.log(res))
         .catch( e => console.log(e))
@@ -74,4 +77,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default PostForm;
+export default Form;
