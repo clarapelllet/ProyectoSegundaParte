@@ -88,11 +88,11 @@ render() {
     return (
         <View style={styles.postContainer}>
         <View style={styles.userInfo}>
-            {/* <TouchableOpacity
+            <TouchableOpacity
              onPress={() => this.props.navigation.navigate(
-                'SuPerfil', this.props.dataPost.datos.owner )}> */}
-                <Text style={styles.username}>Posteo de: {this.props.dataPost.datos.owner}</Text>
-            {/* </TouchableOpacity> */}
+                'Usersprofile', this.props.dataPost.datos.owner )}>
+                <Text >Posteo de: {this.props.dataPost.datos.owner}</Text>
+            </TouchableOpacity>
         </View>
         <Text >{this.props.dataPost.datos.textoPost}</Text>
         <View >
@@ -115,7 +115,7 @@ render() {
             } 
 
 
-            {/* <Text style={styles.likeCount}>{this.state.cantidadDeLikes} Likes</Text> */}
+            <Text style={styles.likeCount}>{this.state.cantidadDeLikes} Likes</Text>
         </View>
         <TextInput
                     style={styles.input}
