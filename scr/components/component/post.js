@@ -128,7 +128,7 @@ render() {
         <TouchableOpacity style={styles.button} onPress={() => this.comment(this.state.comentarioTexto, Date.now())} >
                     <Text style={styles.textButton}>Comentar</Text>
                 </TouchableOpacity>
-                {this.state.CantidadDeComentarios > 0 ?(
+                {this.props.dataPost.datos.comentarios.length > 0 ?(
                        <FlatList
                        data = {this.props.dataPost.datos.comentarios}
                        keyExtractor={(com)=> com.id}
