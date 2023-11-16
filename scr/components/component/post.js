@@ -108,7 +108,7 @@ render() {
                     <TouchableOpacity style={styles.button} onPress={() => this.likear()}>
                         <Text style={styles.textButton}>Like</Text>
                         <AntDesign
-                           name='heart-o' color='black' size={20}
+                           name='hearto' color='black' size={20}
                         />
                     </TouchableOpacity>
 
