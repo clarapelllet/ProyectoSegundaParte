@@ -43,10 +43,10 @@ class Home extends Component {
         return (
             <View>
                 <TouchableOpacity onPressOut={()=>this.logout()}>
-                    <Text>Logout</Text>
+                    <Text style={styles.logout} >Logout</Text>
                 </TouchableOpacity>
 
-                <Text>Lista de posteos creados</Text>
+                <Text style={styles.listaposteos}>Lista de posteos creados</Text>
                 
                 <FlatList
                     data={this.state.posts}
@@ -60,4 +60,26 @@ class Home extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    listaposteos: { 
+        fontWeight: "bold",
+        color: "black",
+        textAlign: "center",
+        fontSize: 20,
+        marginTop: 30,
+        marginBottom: 30,
+    },
+    logout: {
+        fontWeight: "bold",
+        color: "black" ,
+        fontSize: 15,
+        marginTop: 15,
+        textAlign: "center",
+        alignSelf: 'flex-start',
+        marginLeft: 'auto',
+    }
+
+    })
+
 export default Home;

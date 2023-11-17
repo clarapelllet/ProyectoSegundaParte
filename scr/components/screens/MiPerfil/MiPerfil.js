@@ -55,18 +55,18 @@ class MiPerfil extends Component {
         console.log(this.state);
         return(
             <ScrollView>
-                <Text >Profile</Text>
-                <View>
+                <Text style={styles.screenTitle} >Profile</Text>
+                <View style={styles.mainContainer}>
                 <TouchableOpacity onPressOut={()=>this.logout()}>
-                    <Text>Logout</Text>
+                    <Text style={styles.texto}>Logout</Text>
                 </TouchableOpacity>
                   
                 
-                <Text>Mail: {auth.currentUser.email}</Text>
-                <Text>Bio: {this.state.infoUser.biografia}</Text>
+                <Text style={styles.texto} >Mail: {auth.currentUser.email}</Text>
+                <Text style={styles.texto}>Bio: {this.state.infoUser.biografia}</Text>
 
                 </View>
-                <Text >My Posts</Text>
+                <Text style={styles.posteos}>My Posts</Text>
                    
                     <FlatList 
                         data= {this.state.posts}
@@ -80,4 +80,59 @@ class MiPerfil extends Component {
             
         )}
 }
+
+const styles = StyleSheet.create({
+    screenTitle: {
+        fontSize: 25,
+        fontWeight: 'bold',
+        marginLeft: 20,
+        marginVertical: 10,
+        color: "blue"
+
+    },
+    texto: {
+        fontWeight: "bold",
+        color: "black" ,
+        fontSize: 15,
+        marginTop: 15,
+        textAlign: 'center'
+    },
+    posteos: {
+        fontWeight: "bold",
+        color: "black" ,
+        fontSize: 20,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center', // Centra horizontalmente
+        alignItems: 'center', // Centra verticalmente
+        height: '10vh', // Ajusta la altura según sea necesario
+        color: "blue"
+
+
+    },
+    image: {
+        alignSelf: 'center',
+        height: 80,
+        width: "20%",
+        backgroundColor: 'white',
+        borderRadius: 10,
+        marginHorizontal: 100
+    },
+    mainContainer:{
+        flex: 1,
+        backgroundColor: '#ffffff',
+        borderRadius: 6,
+        marginHorizontal: 20,
+        padding: 30,
+        marginVertical: 5,
+        width: 280,
+        height: 100,
+        display: 'flex',
+        justifyContent: 'center', // Centra horizontalmente
+        alignItems: 'center', // Centra verticalmente
+        height: '100vh', // Ajusta la altura según sea necesario
+    },
+    
+
+})
 export default MiPerfil

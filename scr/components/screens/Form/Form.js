@@ -29,7 +29,7 @@ class Form extends Component {
     render(){
         return(
             <View style={styles.formContainer}>
-                <Text>New Post</Text>
+                <Text style={styles.texto}>New Post</Text>
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({textoPost: text})}
@@ -48,7 +48,17 @@ class Form extends Component {
 const styles = StyleSheet.create({
     formContainer:{
         paddingHorizontal:10,
-        marginTop: 20,
+        display: 'flex',
+        justifyContent: 'center', // Centra horizontalmente
+        alignItems: 'center', // Centra verticalmente
+        height: '40vh', 
+    },
+    texto:{
+        fontWeight: "bold",
+        color: "black" ,
+        fontSize: 15,
+        marginTop: 15,
+        textAlign: 'center'
     },
     input:{
         height:20,
@@ -61,14 +71,14 @@ const styles = StyleSheet.create({
         marginVertical:10,
     },
     button:{
-        backgroundColor:'#28a745',
+        backgroundColor:'blue',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
         borderRadius:4, 
         borderWidth:1,
         borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderColor: 'blue'
     },
     textButton:{
         color: '#fff'

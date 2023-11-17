@@ -38,7 +38,7 @@ class Login extends Component {
     render(){
         return(
             <View style={styles.formContainer}>
-                <Text>Login</Text>
+                <Text style={styles.login}>Login</Text>
                 {this.state.errorMessage ? <Text style={styles.errorText}>{this.state.errorMessage}</Text> : null}
                 <TextInput
                     style={styles.input}
@@ -70,6 +70,11 @@ const styles = StyleSheet.create({
     formContainer:{
         paddingHorizontal:10,
         marginTop: 20,
+        display: 'flex',
+        justifyContent: 'center', // Centra horizontalmente
+        alignItems: 'center', // Centra verticalmente
+        height: '100vh', // Ajusta la altura según sea necesario
+
     },
     input:{
         height:20,
@@ -80,7 +85,16 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderRadius: 6,
         marginVertical:10,
+        width: 300,
     },
+
+    login:{
+        fontWeight: "bold",
+        color: "black" ,
+        fontSize: 15,
+        marginTop: 15,
+        textAlign: "center",
+    }, 
     button:{
         backgroundColor:'blue',
         paddingHorizontal: 10,
@@ -89,12 +103,14 @@ const styles = StyleSheet.create({
         borderRadius:4, 
         borderWidth:1,
         borderStyle: 'solid',
-        borderColor: '#28a745'
+        borderColor: '#28a745',
+        width:300,
     },
     textButton:{
         color: '#fff'
     }
 
+    
 })
 
 
