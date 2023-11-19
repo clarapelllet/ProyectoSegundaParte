@@ -7,14 +7,18 @@ class Usersprofile extends Component{
     constructor(props){
         super(props)
         this.state={
-            Mailu: this.props.route.params,
+            Mailu: this.props.route.params.Mailu,
             Infou: {},
             Postsu: []   
         }
     }
 
     componentDidMount(){
-        db.collection('posts').where ('owner', '==', this.dataUser.userName).onSnapshot(docs => {
+        console.log(this.props.route.params)
+        let perfil = this.state.Mailu
+        db.collection('posts')
+        .where ('owner', '==', perfil)
+        .onSnapshot(docs => {
             let posts = []
             docs.forEach(doc => posts.push({
                 id: doc.id,
@@ -22,8 +26,7 @@ class Usersprofile extends Component{
             }))
             this.setState({
                 Postsu: posts
-            }, 
-            () => console.log(this.state.Postsu))
+            })
         })
         db.collection('users')
             .where ('owner', '==', this.state.Mailu)
@@ -36,6 +39,7 @@ class Usersprofile extends Component{
             })
 
     }
+
 
     render(){
         return(

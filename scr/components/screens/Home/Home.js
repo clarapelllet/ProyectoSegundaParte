@@ -1,6 +1,6 @@
 import react, { Component } from 'react';
 import { db, auth } from '../../firebase/config';
-import {TextInput, TouchableOpacity, View, Text, StyleSheet, FlatList} from 'react-native';
+import {TextInput, TouchableOpacity, View, Text, StyleSheet, FlatList, ScrollView} from 'react-native';
 import Post from '../../component/post';
 
 class Home extends Component {
@@ -41,7 +41,7 @@ class Home extends Component {
     render() {
         console.log(this.state);
         return (
-            <View>
+            <ScrollView> 
                 <TouchableOpacity onPressOut={()=>this.logout()}>
                     <Text style={styles.logout} >Logout</Text>
                 </TouchableOpacity>
@@ -56,7 +56,7 @@ class Home extends Component {
 
                     
                 
-            </View>
+    </ScrollView>
         )
     }
 }

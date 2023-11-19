@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import react, { Component } from 'react';
 import { Text, View, StyleSheet, TouchableOpacity, TextInput, FlatList } from 'react-native';
 import { db, auth } from '../firebase/config';
 import firebase from 'firebase';
-import { AntDesign } from '@expo/vector-icons'
+import { AntDesign } from '@expo/vector-icons';
+import Usersprofile from '../screens/usersprofile/Usersprofile';
 
 class Post extends Component {
 
@@ -90,7 +91,7 @@ render() {
         <View style={styles.userInfo}>
             <TouchableOpacity
              onPress={() => this.props.navigation.navigate(
-                'Usersprofile', this.props.dataPost.datos.owner )}>
+                'Usersprofile', {mailu: this.props.dataPost.datos.owner} )}>
                 <Text >Posteo de: {this.props.dataPost.datos.owner}</Text>
             </TouchableOpacity>
         </View>
