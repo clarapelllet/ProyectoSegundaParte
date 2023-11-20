@@ -64,7 +64,7 @@ class Home extends Component {
 const styles = StyleSheet.create({
     listaposteos: { 
         fontWeight: "bold",
-        color: "black",
+        color: "blue",
         textAlign: "center",
         fontSize: 20,
         marginTop: 30,

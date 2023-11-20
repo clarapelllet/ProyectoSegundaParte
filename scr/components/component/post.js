@@ -122,7 +122,7 @@ render() {
             } 
 
 
-            <Text style={styles.likeCount}>{this.state.cantidadDeLikes} Likes</Text>
+            <Text style={styles.texto}>{this.state.cantidadDeLikes} Likes</Text>
         </View>
         <TextInput
                     style={styles.input}
@@ -148,7 +148,7 @@ render() {
                        />
                       
                         ) : 
-                        (<Text style={styles.sincomments}>No hay comentarios</Text>)}
+                        (<Text style={styles.texto}>No hay comentarios</Text>)}
 
      </View> 
 )}}
@@ -156,21 +156,20 @@ render() {
 
 const styles = StyleSheet.create({
     postContainer: {
-        margin: 5,
-        padding: 5,
-        backgroundColor: '#fff',
-        borderRadius: 5,
+        margin: "auto",
+        marginTop: 10,
+        marginBottom: "auto",
+        borderRadius: 10,
         shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        width:450,
+        height: 250,
+        backgroundColor: "lightgrey"
       
     },
     input:{
@@ -184,14 +183,14 @@ const styles = StyleSheet.create({
         marginVertical:10,
     },
     button:{
-        backgroundColor:'orange',
+        backgroundColor:'lightblue',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
         borderRadius:4, 
         borderWidth:1,
         borderStyle: 'solid',
-        borderColor: 'orange',
+        borderColor: 'lightblue',
         width:85,
         height:30,
         marginBottom: 35,
@@ -199,16 +198,19 @@ const styles = StyleSheet.create({
 
     },
     textButton:{
-        color: '#fff'
+        color: 'black',
+        backgroundColor: "lightblue"
     },
     likeContainer: {
             flexDirection: 'row',
-            alignItems: 'center'
+            alignItems: 'center',
         },
-    likeText: {
+    likeCount: {
             marginLeft: 5
         },
-   
+   texto:{
+     fontWeight: "bold"
+   },
     userInfo: {
         marginBottom: 10,
         fontWeight: "bold",
