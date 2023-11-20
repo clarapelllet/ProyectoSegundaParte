@@ -91,11 +91,10 @@ render() {
     return (
         <View style={styles.postContainer}>
         <View style={styles.userInfo}>
-            <TouchableOpacity
-             onPress={() => this.props.navigation.navigate(
-                'Usersprofile', {mailu: this.props.dataPost.datos.owner} )}>
+
+        
                 <Text style={styles.userInfo}>Posteo de: {this.props.dataPost.datos.owner}</Text>
-            </TouchableOpacity>
+
             
         </View>
         <Image
