@@ -48,9 +48,9 @@ class Usersprofile extends Component{
                 <Text>{this.props.route.params}</Text>
                 <Text>{this.state.Infou.bio}</Text>
                 <Text>{this.state.Postsu.length}</Text>
-                {/* <Image
+                <Image
                 source = {{uri: this.state.Infou.profileImage}} /> 
-                 */}
+                
                 <FlatList
                 data= {this.state.Postsu}
                 keyExtractor={item => item.id} 

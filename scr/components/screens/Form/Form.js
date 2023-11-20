@@ -1,16 +1,19 @@
 import react, { Component } from 'react';
 import {db, auth } from '../../firebase/config';
-import {TextInput, TouchableOpacity, View, Text, StyleSheet} from 'react-native';
+import {TextInput, TouchableOpacity, View, Text, StyleSheet, Image} from 'react-native';
+import Camara from '../../component/camara/camara';
 
 class Form extends Component {
     constructor(){
         super()
         this.state={
            textoPost:'',
+           showCamara: true,
+           url: ""
         }
     }
 
-    //1)Completar la creación de posts
+
     crearPost(owner, textoPost, createdAt){
         //Crear la colección Users
         db.collection('posts').add({
@@ -19,27 +22,43 @@ class Form extends Component {
             createdAt: createdAt, //Date.now(), 
             likes: [], 
             comentarios: [], 
-            // photo: this.state.url,
+            photo: this.state.url,
         })
         .then( res => console.log(res))
         .catch( e => console.log(e))
+    }
+    onImageUpload(url){
+        this.setState({
+            url: url,
+            showCamara: false,
+        })
     }
 
 
     render(){
         return(
             <View style={styles.formContainer}>
-                <Text style={styles.texto}>New Post</Text>
+                {
+              this.state.showCamara ?
+              <Camara onImageUpload = {(url)=> this.onImageUpload(url)} />
+              :
+                <View>
+                    
+                <Text style={styles.texto}>Nuevo Posteo</Text>
+                
                 <TextInput
                     style={styles.input}
                     onChangeText={(text)=>this.setState({textoPost: text})}
-                    placeholder='Escribir...'
+                    placeholder='Texto del posteo...'
                     keyboardType='default'
                     value={this.state.textoPost}
+                    
                     />
                 <TouchableOpacity style={styles.button} onPress={()=>this.crearPost(auth.currentUser.email, this.state.textoPost, Date.now())}>
                     <Text style={styles.textButton}>Postear</Text>    
                 </TouchableOpacity>
+                </View>
+                 }
             </View>
         )
     }

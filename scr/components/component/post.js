@@ -1,9 +1,11 @@
 import react, { Component } from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, TextInput, FlatList } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, TextInput, FlatList, Image} from 'react-native';
 import { db, auth } from '../firebase/config';
 import firebase from 'firebase';
 import { AntDesign } from '@expo/vector-icons';
 import Usersprofile from '../screens/usersprofile/Usersprofile';
+
+
 
 class Post extends Component {
 
@@ -94,7 +96,12 @@ render() {
                 'Usersprofile', {mailu: this.props.dataPost.datos.owner} )}>
                 <Text >Posteo de: {this.props.dataPost.datos.owner}</Text>
             </TouchableOpacity>
+            
         </View>
+        <Image
+                style={{width: 300, height: 250 }}
+                source={{ uri: this.props.dataPost.datos.photo }}
+                />
         <Text >{this.props.dataPost.datos.textoPost}</Text>
         <View >
             {
