@@ -64,7 +64,7 @@ class MiPerfil extends Component {
                 
                 <Text style={styles.texto} >Mail: {auth.currentUser.email}</Text>
                 <Text style={styles.texto}>Bio: {this.state.infoUser.biografia}</Text>
-                <Image style={styles.imgperfil} source={{ uri: this.state.infoUser.pImage }} />
+
                 </View>
                 <Text style={styles.posteos}>My Posts</Text>
                    
@@ -110,11 +110,6 @@ const styles = StyleSheet.create({
 
 
     },
-    imgperfil: {
-        height: 60,
-        width: 60,
-        borderRadius: 75,
-    },
     image: {
         alignSelf: 'center',
         height: 80,
@@ -130,8 +125,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         padding: 30,
         marginVertical: 5,
-        width: 380,
-        height: 400,
+        width: 280,
+        height: 100,
         display: 'flex',
         justifyContent: 'center', // Centra horizontalmente
         alignItems: 'center', // Centra verticalmente
