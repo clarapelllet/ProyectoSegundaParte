@@ -94,7 +94,7 @@ render() {
             <TouchableOpacity
              onPress={() => this.props.navigation.navigate(
                 'Usersprofile', {mailu: this.props.dataPost.datos.owner} )}>
-                <Text >Posteo de: {this.props.dataPost.datos.owner}</Text>
+                <Text style={styles.userInfo}>Posteo de: {this.props.dataPost.datos.owner}</Text>
             </TouchableOpacity>
             
         </View>
@@ -157,10 +157,10 @@ render() {
 
 const styles = StyleSheet.create({
     postContainer: {
-        margin: 10,
-        padding: 10,
+        margin: 5,
+        padding: 5,
         backgroundColor: '#fff',
-        borderRadius: 10,
+        borderRadius: 5,
         shadowColor: '#000',
         shadowOffset: {
             width: 0,
@@ -169,6 +169,10 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      
     },
     input:{
         height:20,
@@ -188,7 +192,12 @@ const styles = StyleSheet.create({
         borderRadius:4, 
         borderWidth:1,
         borderStyle: 'solid',
-        borderColor: 'orange'
+        borderColor: 'orange',
+        width:85,
+        height:30,
+        marginBottom: 35,
+
+
     },
     textButton:{
         color: '#fff'
@@ -203,6 +212,8 @@ const styles = StyleSheet.create({
    
     userInfo: {
         marginBottom: 10,
+        fontWeight: "bold",
+        color: "black" ,
     },
  });
 
